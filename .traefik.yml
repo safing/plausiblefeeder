@@ -1,0 +1,32 @@
+# The name of your plugin as displayed in the Plugins Catalog web UI.
+displayName: Plausible Feeder
+
+# For now, `middleware` is the only type available.
+type: middleware
+
+# The import path of your plugin.
+import: "github.com/safing/plausiblefeeder"
+
+# A brief description of what your plugin is doing.
+summary: Feeds HTTP requests to plausible as pageview events.
+
+# Medias associated to the plugin (optional)
+# iconPath: foo/icon.png
+# bannerPath: foo/banner.png
+
+# Configuration data for your plugin.
+# This is mandatory,
+# and Plugins Catalog will try to execute the plugin with the data you provide as part of its startup validity tests.
+testData:
+  eventEndpoint: "http://plausible:8000/api/events"
+  domains:
+    - localhost
+  reportExtensions:
+    - ".html"
+    - "" # resources without extension
+  reportAllResources: false
+  reportAnyHost: false
+  reportErrors: false
+  remoteIPFromHeader: "X-Forwarded-For"
+  queueSize: 1000
+  debugLogging: false

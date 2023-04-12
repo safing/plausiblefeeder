@@ -1,0 +1,17 @@
+http:
+  middlewares:
+    my-plausiblefeeder:
+      plugin:
+        plausiblefeeder:
+          eventEndpoint: "http://plausible:8000/api/event"
+          domains:
+            - localhost
+          reportExtensions:
+            - "html"
+            - "" # resources without extension
+          reportAllResources: false
+          reportAnyHost: false
+          reportErrors: false
+          remoteIPFromHeader: "X-Forwarded-For"
+          queueSize: 1000
+          debugLogging: true
