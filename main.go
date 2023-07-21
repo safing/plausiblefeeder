@@ -182,9 +182,11 @@ func (pef *PlausibleEventFeeder) resourceIsReportable(r *http.Request) (report b
 	switch path.Ext(r.URL.Path) {
 	case ".htm":
 	case ".html":
+	case ".md":
 	case ".php":
 	case ".rss":
 	case ".rtf":
+	case ".txt":
 	case ".xml":
 	case "":
 	default:
