@@ -1,6 +1,11 @@
 package plausiblefeeder
 
-import "net/http"
+import (
+	"bufio"
+	"fmt"
+	"net"
+	"net/http"
+)
 
 // ResponseWriter is used to wrap given response writers.
 type ResponseWriter struct {
@@ -18,4 +23,19 @@ func (rw *ResponseWriter) WriteHeader(code int) {
 
 	// Continue with the original method.
 	rw.ResponseWriter.WriteHeader(code)
+}
+
+func (rw *ResponseWriter) Hijack() (net.Conn, *bufio.ReadWriter, error) {
+	hijacker, ok := rw.ResponseWriter.(http.Hijacker)
+	if !ok {
+		return nil, nil, fmt.Errorf("%T is not a http.Hijacker", rw.ResponseWriter)
+	}
+
+	return hijacker.Hijack()
+}
+
+func (rw *ResponseWriter) Flush() {
+	if flusher, ok := rw.ResponseWriter.(http.Flusher); ok {
+		flusher.Flush()
+	}
 }

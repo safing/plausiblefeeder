@@ -133,7 +133,7 @@ func (pef *PlausibleEventFeeder) ServeHTTP(w http.ResponseWriter, r *http.Reques
 		return
 	}
 
-	// If the resource should be reported, we warp the response writer and check the status code before reporting.
+	// If the resource should be reported, we wrap the response writer and check the status code before reporting.
 	wrappedResponseWriter := &ResponseWriter{
 		ResponseWriter: w,
 		request:        r,
